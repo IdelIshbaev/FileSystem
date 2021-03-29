@@ -3,10 +3,9 @@
 	<div>
 		<h1>{{content.name}}</h1>
 		<ul v-for="item in content.children" :key="item.name">
-			<li>
+			<li class="foldername " :class="{chosen: item==currentFileName}">
 				<span :class="{folder: item.folder, file: !item.folder }"></span> 
-				<span :class="{chosen: item==currentFileName}" 
-					@click="currentFileName=item; updateCurrentFile()"> 
+				<span  @click="currentFileName=item; updateCurrentFile()"> 
 					{{item.name}}
 					</span>
 			</li>
@@ -41,8 +40,19 @@ export default {
 li{
 	list-style-type: none;
 }
+ul{
+	margin: 0;
+	padding: 0;
+}
+.foldername{
+	display: inline-block;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 8px;
+	margin: 8px;
+}
 .chosen{
-	background: rgb(169, 205, 219);
+	background: rgb(193, 206, 211);
 	border-radius: 5px;
 }
 .file {

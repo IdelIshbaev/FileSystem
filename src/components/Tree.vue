@@ -3,13 +3,13 @@
 		<div 
 			v-if="filesystem.folder"
 			@click="show = !show; submit()"
-			:style="{'margin-left': `${depth * 25}px`}"
+			:style="{'margin-left': `${depth * 30}px`}"
 			class="leaf"
 			>
-			<p>
+			<p class="foldername" :class="{chosen: filesystem == getCurrentFolder}">
 				<!-- <span class="type">{{show ? '&#9660;' : '&#9658;'}}</span> -->
 				<span class="folder"></span>
-				<span :class="{chosen: filesystem == getCurrentFolder}"> {{filesystem.name}}</span>
+				<span > {{filesystem.name}}</span>
 			</p>
 		</div>
 		<div v-if="show">
@@ -64,13 +64,25 @@ computed: mapGetters(["getCurrentFolder"]),
 }
 </script>
 <style scoped>
+.foldername{
+	display: inline-block;
+	padding-right: 5px;
+	padding-left: 5px;
+	padding-bottom: 8px;
+	margin: 8px;
+}
+.chosen{
+	background: rgb(193, 206, 211);
+	border-radius: 5px;
+}
+
 .leaf{
 	text-align: left;
 }
-.chosen{
+/* .chosen{
 	background: rgb(169, 205, 219);
 	border-radius: 5px;
-}
+} */
 .folder {
 width: 30px;
 height: 20px;

@@ -59,19 +59,19 @@ html, body{
 	margin: 0;
 }
 .tree{
-	display: inline-block;
+	/* display: inline-block; */
 	float: left;
 	width: 47vw;
-  height: 85vh;
+  height: 87vh;
   border: solid;
   padding: 10px;
 
 }
 .content{
-	display: inline-block;
+	/* display: inline-block; */
 	float: left;
 	width: 47vw;
-  height: 85vh;
+  height: 87vh;
   border: solid; 
   padding: 10px;
 }
