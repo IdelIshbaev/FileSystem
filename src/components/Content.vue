@@ -4,17 +4,35 @@
 		<h1>{{content.name}}</h1>
 		<ul v-for="item in content.children" :key="item.name">
 			<li>
-				<span :class="{folder: item.folder, file: !item.folder }"></span> {{item.name}}
+				<span :class="{folder: item.folder, file: !item.folder }"></span> 
+				<span @click="currentFileName=item; updateCurrentFile()"> 
+					{{item.name}}
+					</span>
 			</li>
 		</ul>
 
 	</div>
 </template>
-
 <script>
+import {mapMutations} from 'vuex'
+
 export default {
 	props: {
 		content: Object
+	},
+	data (){
+		return{
+			currentFileName: Object
+		}
+	},
+	methods:{
+		...mapMutations(["updateCurrentFileInContent"]),
+		updateCurrentFile(){
+			this.updateCurrentFileInContent(this.currentFileName);
+		},
+		cons(){
+			console.log(this.currentFileName)
+		}
 	}
 }
 </script>

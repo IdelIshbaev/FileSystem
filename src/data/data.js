@@ -4,33 +4,49 @@ const filesystem =
 	folder: true,
 	children: [
 		{
-			name: "sub folder 1",
+			name: "first layer 1",
 			folder: true,
 			children: [
 				{
-					name: "subsub folder 1",
+					name: "second layer 1",
 					folder: true,
 					children: []
 				},
 				{
-					name: "subsub file 2",
+					name: "second layer file 1",
 					folder: false,
 					children: []
 				},
 				{
-					name: "subsub file 3",
+					name: "second layer file 2",
 					folder: false,
 					children: []
 				},
 			]
 		},
 		{
-			name: "sub folder 2",
+			name: "first layer 2",
 			folder: true,
-			children: []
+			children: [
+								{
+					name: "second.2 layer 1",
+					folder: true,
+					children: []
+				},
+				{
+					name: "second.2 layer file 1",
+					folder: false,
+					children: []
+				},
+				{
+					name: "second.2 layer file 2",
+					folder: false,
+					children: []
+				},
+			]
 		},
 		{
-			name: "sub file 3",
+			name: "first layer file 1",
 			folder: false,
 			children: []
 		}

@@ -15,6 +15,9 @@ export default {
     },
     updateActiveZone(state, activeTree) {
       state.activeTree = activeTree
+    },
+    updateCurrentFileInContent(state, name) {
+      state.currentFileInContent = name;
     }
   },
   state: {
@@ -23,7 +26,8 @@ export default {
       type: Object,
       default: {},
     },
-    activeTree: Boolean
+    activeTree: Boolean,
+    currentFileInContent: Object
   },
   getters: {
     getFilesystem(state) {
@@ -34,6 +38,9 @@ export default {
     },
     getActiveTree(state) {
       return state.activeTree
+    },
+    getcurrentFileInContent(state) {
+      return state.currentFileInContent
     }
   }
 }

@@ -1,7 +1,8 @@
 <template>
 	<div class="btns">
       <button class="btn" @click="showInput = !showInput">NEW</button>
-      <button class="btn">Delete</button>
+      <button class="btn" @click="deleteF">Delete</button>
+	  <button class="btn" @click="showInput = !showInput; rename = true">Rename</button>
 	  <div :class="{inputName: showInput}"> 
 		  <input  v-model="newname" 
 		  	placeholder="type name for folder/file" 
@@ -16,50 +17,56 @@
 import {mapMutations, mapGetters} from 'vuex'
 import filesystem from '../data/data'
 export default {
-	computed: mapGetters(["getCurrentFolder", "getFilesystem", "getActiveTree"]),
+	computed: mapGetters(["getCurrentFolder", "getFilesystem", "getActiveTree", "getcurrentFileInContent"]),
 	methods:{
-		// ...mapMutations(["deleteFolder"]),
+		...mapMutations(["updateCurrentFolder"]),
 		createF(){
 			if(this.getActiveTree == true){
-				console.log("create folder in tree")
-				console.log(this.getCurrentFolder.children)
-				this.getCurrentFolder.children.push(
-					{
-						name:this.newname,
-						folder:true,
-						children:[]
-						})
+				if(this.rename == false){
+					this.getCurrentFolder.children.push(
+						{
+							name:this.newname,
+							folder:true,
+							children:[]
+							})
+				}else{
+					this.getCurrentFolder.name = this.newname
+					this.rename == false
+				}
 			}else{
-				console.log("create file in content zone")
-				this.getCurrentFolder.children.push(
-					{
-						name: this.newname,
-						folder:false,
-						children:[]
-						})
+				if(this.rename == false){
+					this.getCurrentFolder.children.push(
+						{
+							name: this.newname,
+							folder:false,
+							children:[]
+							})
+				}else{
+					this.getcurrentFileInContent.name = this.newname
+					this.rename == false
+				}
 			}
 			this.newname = ""
 		},
-
-
-
-
-		// deleteF(){
-		// 	var temp = this.getFilesystem
-		// 	console.log(temp)
-		// 	this.recursDel(temp);
-		// 	console.log(temp)
-		// 	// this.deleteFolder(this.getCurrentFolder)
-		// },
-		recursDel(tempfiles){
-			console.log(tempfiles)
-			if(tempfiles.name == this.getCurrentFolder.name){
-				console.log("done")
-				tempfiles = null
-			}else{
-				for( var i = 0; i < tempfiles.children.length; i++){
-					this.recursDel(tempfiles.children[i])
+		deleteF(){
+			if(this.getActiveTree == true){
+				var temp = this.getFilesystem
+				this.recursDel(temp, this.getCurrentFolder);
+				this.updateCurrentFolder({})
+			}else if( this.getActiveTree == false){
+				var temp = this.getFilesystem
+				this.recursDel(temp, this.getcurrentFileInContent);
+			}
+		},
+		recursDel(tempfiles, checkObj){
+			for(var i = 0; i < tempfiles.children.length; i++){
+				if(tempfiles.children[i].name == checkObj.name){
+					tempfiles.children.splice(i, 1)
+					return;
 				}
+			}
+			for( var i = 0; i < tempfiles.children.length; i++){
+				this.recursDel(tempfiles.children[i], checkObj)
 			}
 		}
 	},
@@ -67,7 +74,8 @@ export default {
 		return{
 			files: this.getFilesystem,
 			newname: "",
-			showInput: true
+			showInput: true,
+			rename: false
 		}
   },
 }
