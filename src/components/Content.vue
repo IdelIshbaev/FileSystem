@@ -5,7 +5,8 @@
 		<ul v-for="item in content.children" :key="item.name">
 			<li>
 				<span :class="{folder: item.folder, file: !item.folder }"></span> 
-				<span @click="currentFileName=item; updateCurrentFile()"> 
+				<span :class="{chosen: item==currentFileName}" 
+					@click="currentFileName=item; updateCurrentFile()"> 
 					{{item.name}}
 					</span>
 			</li>
@@ -37,10 +38,14 @@ export default {
 }
 </script>
 <style scoped>
-	li{
-		  list-style-type: none;
-	}
-  .file {
+li{
+	list-style-type: none;
+}
+.chosen{
+	background: rgb(169, 205, 219);
+	border-radius: 5px;
+}
+.file {
     background:#eee;
     background:-moz-linear-gradient(top, #ddd 0, #eee 15%, #fff 40%, #fff 70%, #eee 100%);
     background:-webkit-linear-gradient(top, #ddd 0, #eee 15%, #fff 40%, #fff 70%, #eee 100%);

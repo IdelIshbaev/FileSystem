@@ -31,7 +31,7 @@ export default {
 							})
 				}else{
 					this.getCurrentFolder.name = this.newname
-					this.rename == false
+					this.rename = false
 				}
 			}else{
 				if(this.rename == false){
@@ -43,7 +43,7 @@ export default {
 							})
 				}else{
 					this.getcurrentFileInContent.name = this.newname
-					this.rename == false
+					this.rename = false
 				}
 			}
 			this.newname = ""

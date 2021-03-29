@@ -3,13 +3,13 @@
 		<div 
 			v-if="filesystem.folder"
 			@click="show = !show; submit()"
-			:style="{'margin-left': `${depth * 20}px`}"
+			:style="{'margin-left': `${depth * 25}px`}"
 			class="leaf"
 			>
 			<p>
 				<!-- <span class="type">{{show ? '&#9660;' : '&#9658;'}}</span> -->
 				<span class="folder"></span>
-				<span :class="{chosen: show}"> {{filesystem.name}}</span>
+				<span :class="{chosen: filesystem == getCurrentFolder}"> {{filesystem.name}}</span>
 			</p>
 		</div>
 		<div v-if="show">
@@ -23,10 +23,11 @@
 	</div>
 </template>
 <script>
-import {mapMutations} from 'vuex'
+import {mapMutations,mapGetters} from 'vuex'
 
 export default {
   name: 'Tree',
+computed: mapGetters(["getCurrentFolder"]),
   data() {
 	return{
 		show: false,
