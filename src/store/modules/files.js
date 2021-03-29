@@ -12,14 +12,18 @@ export default {
     },
     updateCurrentFolder(state, folder) {
       state.currentFolder = folder;
+    },
+    updateActiveZone(state, activeTree) {
+      state.activeTree = activeTree
     }
   },
   state: {
     folders: Object,
     currentFolder: {
       type: Object,
-      default: {}
-    }
+      default: {},
+    },
+    activeTree: Boolean
   },
   getters: {
     getFilesystem(state) {
@@ -27,6 +31,9 @@ export default {
     },
     getCurrentFolder(state) {
       return state.currentFolder
+    },
+    getActiveTree(state) {
+      return state.activeTree
     }
   }
 }

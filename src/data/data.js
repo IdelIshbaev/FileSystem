@@ -14,11 +14,13 @@ const filesystem =
 				},
 				{
 					name: "subsub file 2",
-					folder: false
+					folder: false,
+					children: []
 				},
 				{
 					name: "subsub file 3",
-					folder: false
+					folder: false,
+					children: []
 				},
 			]
 		},
@@ -29,7 +31,8 @@ const filesystem =
 		},
 		{
 			name: "sub file 3",
-			folder: false
+			folder: false,
+			children: []
 		}
 	]
 };

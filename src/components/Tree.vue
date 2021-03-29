@@ -4,11 +4,12 @@
 			v-if="filesystem.folder"
 			@click="show = !show; submit()"
 			:style="{'margin-left': `${depth * 20}px`}"
-			class="leaf">
+			class="leaf"
+			>
 			<p>
 				<!-- <span class="type">{{show ? '&#9660;' : '&#9658;'}}</span> -->
 				<span class="folder"></span>
-				{{filesystem.name}}
+				<span :class="{chosen: show}"> {{filesystem.name}}</span>
 			</p>
 		</div>
 		<div v-if="show">
@@ -64,6 +65,10 @@ export default {
 <style scoped>
 .leaf{
 	text-align: left;
+}
+.chosen{
+	background: rgb(169, 205, 219);
+	border-radius: 5px;
 }
 .folder {
 width: 30px;
